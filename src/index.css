@@ -130,10 +130,24 @@ body {
   margin-bottom: 40px;
 }
 
-.table-responsive {
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+.table-wrapper {
+  max-height: 500px; /* Adjust based on your needs */
+  overflow: auto;
+  margin-bottom: 20px;
+}
+
+.table-wrapper::-webkit-scrollbar {
+  width: 8px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.table-wrapper {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .results-table {
@@ -151,8 +165,12 @@ body {
 }
 
 .results-table th {
-  background-color: #4caf50;
-  color: white;
+  position: sticky;
+  top: 0;
+  background-color: #4caf50; /* Ensures the header has a solid background */
+  color: white; /* Maintains text color for readability */
+  z-index: 2; /* Places the header above table cells */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Adds shadow for visual separation */
 }
 
 .results-table tr:nth-child(even) {
@@ -203,11 +221,11 @@ body {
 }
 
 /* Hide scrollbar for Webkit browsers while keeping functionality */
-.table-responsive::-webkit-scrollbar {
+.table-wrapper::-webkit-scrollbar {
   display: none;
 }
 
-.table-responsive {
+.table-wrapper {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
@@ -320,5 +338,9 @@ button:focus {
   .back-button {
     padding: 6px 12px;
     font-size: 0.85rem;
+  }
+
+  .table-wrapper {
+    max-height: 300px; /* Adjust for smaller screens */
   }
 }
