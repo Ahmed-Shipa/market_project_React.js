@@ -1,0 +1,324 @@
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Container Styles */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Ensures the container takes at least the full viewport height */
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+
+.header {
+  font-size: 2.5rem; /* Responsive font size */
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+/* Form Styles */
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 500px;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.label {
+  margin-bottom: 8px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.input {
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.3s ease;
+  outline: none;
+  width: 100%;
+}
+
+.input:focus {
+  border-color: #007bff;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 5px;
+}
+
+.submit-button {
+  padding: 12px;
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
+.submit-button .spinner {
+  width: 24px;
+  height: 24px;
+  border: 4px solid rgba(255, 255, 255, 0.6);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.submit-button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Results Container */
+.results-container {
+  margin: 20px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.results-container h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+.table-section {
+  margin-bottom: 40px;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px; /* Ensures tables have a minimum width */
+  margin: 20px 0;
+}
+
+.results-table th,
+.results-table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.results-table th {
+  background-color: #4caf50;
+  color: white;
+}
+
+.results-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.results-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Buttons */
+.show-more-button,
+.back-button {
+  margin: 20px auto 0;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  transition: background-color 0.3s ease;
+}
+
+.show-more-button:hover,
+.back-button:hover {
+  background-color: #0056b3;
+}
+
+/* Spinner Animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Touch Targets */
+.show-more-button,
+.back-button,
+.submit-button {
+  min-width: 120px;
+  min-height: 44px; /* Recommended minimum size for touch targets */
+}
+
+/* Optimize Form Inputs for Mobile */
+.input {
+  width: 100%;
+}
+
+/* Hide scrollbar for Webkit browsers while keeping functionality */
+.table-responsive::-webkit-scrollbar {
+  display: none;
+}
+
+.table-responsive {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Additional Accessibility Enhancements */
+label {
+  display: block;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* Ensure buttons have focus styles for accessibility */
+button:focus {
+  outline: 2px dashed #333;
+  outline-offset: 4px;
+}
+
+/* Media Queries */
+
+/* Styles for screens 448px and above */
+@media (min-width: 448px) {
+  .header {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+  }
+
+  .form {
+    padding: 30px;
+    max-width: 500px;
+  }
+
+  .label {
+    font-size: 1rem;
+  }
+
+  .input {
+    font-size: 1rem;
+    padding: 12px;
+  }
+
+  .submit-button {
+    font-size: 1.125rem;
+    padding: 12px;
+  }
+
+  .results-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .results-table th,
+  .results-table td {
+    padding: 12px 15px;
+  }
+
+  .show-more-button,
+  .back-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
+}
+
+/* Styles for screens below 448px */
+@media (max-width: 447px) {
+  .header {
+    font-size: 1.75rem;
+    margin-bottom: 20px;
+  }
+
+  .form {
+    padding: 15px;
+    max-width: 100%;
+  }
+
+  .label {
+    font-size: 0.9rem;
+  }
+
+  .input {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  .submit-button {
+    font-size: 0.95rem;
+    padding: 8px;
+  }
+
+  .results-container {
+    padding: 10px;
+    margin: 5px;
+  }
+
+  .results-container h2 {
+    font-size: 1.1rem;
+  }
+
+  .table-section {
+    margin-bottom: 20px;
+  }
+
+  .results-table th,
+  .results-table td {
+    padding: 8px 10px;
+    font-size: 0.85rem;
+  }
+
+  .show-more-button,
+  .back-button {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+}
