@@ -1,16 +1,19 @@
+// Results.js
+
 import React from "react";
 
 // Define custom column names
 const customColumnNames = [
-  "الزيت", // Change these to your desired names
-  "السكر",
-  "مكرونة",
-  "الشاى",
-  "برسيل",
-  "بريل",
-  "ملح",
-  "بسكويت",
-  "صابون",
+  "الزيت",   // Input 1
+  "السكر",   // Input 2
+  "مكرونة",  // Input 3
+  "الشاى",   // Input 4
+  "برسيل",   // Input 5
+  "بريل",    // Input 6
+  "ملح",     // Input 7
+  "بسكويت",  // Input 8
+  "صابون",   // Input 9
+  "دقيق", // Input 10
 ];
 
 const Results = ({
@@ -29,9 +32,15 @@ const Results = ({
   customResults,
   showMoreForCustom,
   onShowMoreForCustom,
-  sixthResults, // New prop
-  showMoreForSixth, // New prop
-  onShowMoreForSixth, // New prop
+  sixthResults,
+  showMoreForSixth,
+  onShowMoreForSixth,
+  seventhResults, // New prop
+  showMoreForSeventh, // New prop
+  onShowMoreForSeventh, // New prop
+  eighthResults, // New prop
+  showMoreForEighth, // New prop
+  onShowMoreForEighth, // New prop
   onGoBack,
 }) => {
   return (
@@ -251,6 +260,83 @@ const Results = ({
           المزيد
         </button>
       )}
+
+      {/* Seventh Table */}
+      <h2 className="mt-4">تفريدة 7 فرد (273-274)</h2>
+
+      {seventhResults.length > 0 ? (
+        <table className="results-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              {customColumnNames.map((name, index) => (
+                <th key={index}>{name}</th>
+              ))}
+              <th>المجموع</th>
+            </tr>
+          </thead>
+          <tbody>
+            {seventhResults.map((result, index) => (
+              <tr key={index}>
+                <td>{index + 1}</td>
+                {customColumnNames.map((name, colIndex) => (
+                  <td key={colIndex}>{result[`input${colIndex + 1}`]}</td>
+                ))}
+                <td>{result.sum.toFixed(2)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <p className="alert alert-danger text-center">لا يوجد تفريده ل 7  فرد من هذة السلع </p>
+      )}
+
+      {showMoreForSeventh && (
+        <button className="show-more-button" onClick={onShowMoreForSeventh}>
+          المزيد
+        </button>
+      )}
+
+      {/* Eighth Table */}
+      <h2 className="mt-4">تفريدة 8 فرد (298-299)</h2>
+
+      {eighthResults.length > 0 ? (
+        <table className="results-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              {customColumnNames.map((name, index) => (
+                <th key={index}>{name}</th>
+              ))}
+              <th>المجموع</th>
+            </tr>
+          </thead>
+          <tbody>
+            {eighthResults.map((result, index) => (
+              <tr key={index}>
+                <td>{index + 1}</td>
+                {customColumnNames.map((name, colIndex) => (
+                  <td key={colIndex}>{result[`input${colIndex + 1}`]}</td>
+                ))}
+                <td>{result.sum.toFixed(2)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <p className="alert alert-danger text-center">لا يوجد تفريده ل 8  فرد من هذة السلع </p>
+      )}
+
+      {showMoreForEighth && (
+        <button className="show-more-button" onClick={onShowMoreForEighth}>
+          المزيد
+        </button>
+      )}
+
+      {/* Back Button */}
+      <button className="back-button" onClick={onGoBack}>
+        عودة
+      </button>
     </div>
   );
 };

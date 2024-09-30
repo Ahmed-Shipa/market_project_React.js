@@ -15,6 +15,7 @@ const IntroductionForm = () => {
     "input7",
     "input8",
     "input9",
+    "input10", // New input key
   ];
 
   // Managing state for each individual input
@@ -26,8 +27,9 @@ const IntroductionForm = () => {
     input5: "",
     input6: "",
     input7: "",
-    input8: "", // New input
-    input9: "", // New input
+    input8: "",
+    input9: "",
+    input10: "", // New input
   });
 
   // State to manage error messages for each input
@@ -39,8 +41,9 @@ const IntroductionForm = () => {
     input5: "",
     input6: "",
     input7: "",
-    input8: "", // New input error
-    input9: "", // New input error
+    input8: "",
+    input9: "",
+    input10: "", // New input error
   });
 
   // State variables for combinations and pagination
@@ -50,6 +53,8 @@ const IntroductionForm = () => {
   const [quadrupledResults, setQuadrupledResults] = useState([]);
   const [customResults, setCustomResults] = useState([]);
   const [sixthResults, setSixthResults] = useState([]); // New state for sixth table
+  const [seventhResults, setSeventhResults] = useState([]); // New state for seventh table
+  const [eighthResults, setEighthResults] = useState([]); // New state for eighth table
 
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -83,17 +88,26 @@ const IntroductionForm = () => {
   const [visibleSixthResults, setVisibleSixthResults] = useState([]); // New visible results
   const [showMoreForSixth, setShowMoreForSixth] = useState(false); // New show more state
 
+  const [currentPageForSeventh, setCurrentPageForSeventh] = useState(0); // New pagination state
+  const [visibleSeventhResults, setVisibleSeventhResults] = useState([]); // New visible results
+  const [showMoreForSeventh, setShowMoreForSeventh] = useState(false); // New show more state
+
+  const [currentPageForEighth, setCurrentPageForEighth] = useState(0); // New pagination state
+  const [visibleEighthResults, setVisibleEighthResults] = useState([]); // New visible results
+  const [showMoreForEighth, setShowMoreForEighth] = useState(false); // New show more state
+
   // Predefined multipliers for each input
   const inputMultipliers = {
     input1: 29.75,
     input2: 12.35,
-    input3: 7.60,
-    input4: 4.90,
+    input3: 7.6,
+    input4: 4.9,
     input5: 4.35,
     input6: 2.85,
     input7: 1.15,
-    input8: 2.85, // New input multiplier
-    input9: 7.25, // New input multiplier
+    input8: 2.85,
+    input9: 7.25,
+    input10: 17.75, // New input multiplier
   };
 
   // Handle input changes and validation
@@ -589,6 +603,176 @@ const IntroductionForm = () => {
     setShowMoreForSixth(validCombinations.length > combinationsPerPage);
   };
 
+  // Function to calculate combinations for the seventh table (Table 7)
+  const calculateCombinationsWithSeventhInputs = (inputValues) => {
+    const targetMin = 273;
+    const targetMax = 274;
+    const precision = 0.001;
+    const selectedInputs = [];
+
+    Object.keys(inputValues).forEach((key) => {
+      let multiplier = inputMultipliers[key];
+
+      if (inputValues[key] !== "") {
+        if (key === "input1") {
+          multiplier *= 4;
+        } else if (key === "input2") {
+          multiplier *= 6;
+        }
+        selectedInputs.push({ key, multiplier });
+      }
+    });
+
+    const combinations = [];
+
+    const generateCombinations = (
+      currentIndex,
+      currentCombination,
+      currentSum
+    ) => {
+      if (
+        currentSum >= targetMin - precision &&
+        currentSum <= targetMax + precision
+      ) {
+        combinations.push(
+          ensureAllInputs({ ...currentCombination, sum: currentSum })
+        );
+      }
+
+      if (
+        currentSum > targetMax + precision ||
+        currentIndex >= selectedInputs.length
+      )
+        return;
+
+      const { key, multiplier } = selectedInputs[currentIndex];
+
+      if (key === "input1") {
+        const newCombination = { ...currentCombination, [key]: 4 };
+        generateCombinations(
+          currentIndex + 1,
+          newCombination,
+          currentSum + 4 * inputMultipliers[key]
+        );
+      } else if (key === "input2") {
+        const newCombination = { ...currentCombination, [key]: 6 };
+        generateCombinations(
+          currentIndex + 1,
+          newCombination,
+          currentSum + 6 * inputMultipliers[key]
+        );
+      } else {
+        for (let i = 0; i <= 20; i++) {
+          const newCombination = { ...currentCombination, [key]: i };
+          generateCombinations(
+            currentIndex + 1,
+            newCombination,
+            currentSum + i * multiplier
+          );
+        }
+      }
+    };
+
+    generateCombinations(0, {}, 0);
+
+    const validCombinations = combinations.filter(
+      (combination) =>
+        combination.sum !== null &&
+        combination.sum !== undefined &&
+        !isNaN(combination.sum)
+    );
+
+    setSeventhResults(validCombinations);
+    setCurrentPageForSeventh(0);
+    setVisibleSeventhResults(validCombinations.slice(0, combinationsPerPage));
+    setShowMoreForSeventh(validCombinations.length > combinationsPerPage);
+  };
+
+  // Function to calculate combinations for the eighth table (Table 8)
+  const calculateCombinationsWithEighthInputs = (inputValues) => {
+    const targetMin = 298;
+    const targetMax = 299;
+    const precision = 0.001;
+    const selectedInputs = [];
+
+    Object.keys(inputValues).forEach((key) => {
+      let multiplier = inputMultipliers[key];
+
+      if (inputValues[key] !== "") {
+        if (key === "input1") {
+          multiplier *= 4;
+        } else if (key === "input2") {
+          multiplier *= 6;
+        }
+        selectedInputs.push({ key, multiplier });
+      }
+    });
+
+    const combinations = [];
+
+    const generateCombinations = (
+      currentIndex,
+      currentCombination,
+      currentSum
+    ) => {
+      if (
+        currentSum >= targetMin - precision &&
+        currentSum <= targetMax + precision
+      ) {
+        combinations.push(
+          ensureAllInputs({ ...currentCombination, sum: currentSum })
+        );
+      }
+
+      if (
+        currentSum > targetMax + precision ||
+        currentIndex >= selectedInputs.length
+      )
+        return;
+
+      const { key, multiplier } = selectedInputs[currentIndex];
+
+      if (key === "input1") {
+        const newCombination = { ...currentCombination, [key]: 4 };
+        generateCombinations(
+          currentIndex + 1,
+          newCombination,
+          currentSum + 4 * inputMultipliers[key]
+        );
+      } else if (key === "input2") {
+        const newCombination = { ...currentCombination, [key]: 6 };
+        generateCombinations(
+          currentIndex + 1,
+          newCombination,
+          currentSum + 6 * inputMultipliers[key]
+        );
+      } else {
+        for (let i = 0; i <= 20; i++) {
+          const newCombination = { ...currentCombination, [key]: i };
+          generateCombinations(
+            currentIndex + 1,
+            newCombination,
+            currentSum + i * multiplier
+          );
+        }
+      }
+    };
+
+    generateCombinations(0, {}, 0);
+
+    const validCombinations = combinations.filter(
+      (combination) =>
+        combination.sum !== null &&
+        combination.sum !== undefined &&
+        !isNaN(combination.sum)
+    );
+
+    setEighthResults(validCombinations);
+    setCurrentPageForEighth(0);
+    setVisibleEighthResults(validCombinations.slice(0, combinationsPerPage));
+    setShowMoreForEighth(validCombinations.length > combinationsPerPage);
+  };
+
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -596,10 +780,10 @@ const IntroductionForm = () => {
     let errors = {};
 
     if (inputValues.input1 !== "1") {
-      errors.input1 = "يجب ان تكون قيمة الزيت موجودة";
+      errors.input1 = "يجب اضافة الزيت";
     }
     if (inputValues.input2 !== "1") {
-      errors.input2 = "يجب ان تكون قيمة السكر موجودة";
+      errors.input2 = "يحب اضافة السكر";
     }
 
     if (Object.keys(errors).length > 0) {
@@ -619,6 +803,8 @@ const IntroductionForm = () => {
       calculateCombinationsWithQuadrupledInputs(inputValues);
       calculateCombinationsWithCustomInputs(inputValues);
       calculateCombinationsWithSixthInputs(inputValues);
+      calculateCombinationsWithSeventhInputs(inputValues); // New calculation
+      calculateCombinationsWithEighthInputs(inputValues); // New calculation
 
       // Set loading to false after calculations are done
       setIsLoading(false);
@@ -727,6 +913,34 @@ const IntroductionForm = () => {
     }
   };
 
+  const handleShowMoreForSeventh = () => {
+    const nextPage = currentPageForSeventh + 1;
+    const nextResults = seventhResults.slice(
+      0,
+      (nextPage + 1) * combinationsPerPage
+    );
+    setVisibleSeventhResults(nextResults);
+    setCurrentPageForSeventh(nextPage);
+
+    if (nextResults.length >= seventhResults.length) {
+      setShowMoreForSeventh(false);
+    }
+  };
+
+  const handleShowMoreForEighth = () => {
+    const nextPage = currentPageForEighth + 1;
+    const nextResults = eighthResults.slice(
+      0,
+      (nextPage + 1) * combinationsPerPage
+    );
+    setVisibleEighthResults(nextResults);
+    setCurrentPageForEighth(nextPage);
+
+    if (nextResults.length >= eighthResults.length) {
+      setShowMoreForEighth(false);
+    }
+  };
+
   // Conditional rendering
   if (isSubmitted) {
     return (
@@ -749,6 +963,12 @@ const IntroductionForm = () => {
         sixthResults={visibleSixthResults}
         showMoreForSixth={showMoreForSixth}
         onShowMoreForSixth={handleShowMoreForSixth}
+        seventhResults={visibleSeventhResults} // New prop
+        showMoreForSeventh={showMoreForSeventh} // New prop
+        onShowMoreForSeventh={handleShowMoreForSeventh} // New prop
+        eighthResults={visibleEighthResults} // New prop
+        showMoreForEighth={showMoreForEighth} // New prop
+        onShowMoreForEighth={handleShowMoreForEighth} // New prop
         onGoBack={() => window.history.back()}
       />
     );
@@ -927,6 +1147,25 @@ const IntroductionForm = () => {
           />
           {inputErrors.input9 && (
             <p className="error-message">{inputErrors.input9}</p>
+          )}
+        </div>
+
+        {/* New Input 10 */}
+        <div className="input-container">
+          <label htmlFor="input10" className="label fw-bold fs-4">
+            دقيق
+          </label>
+          <input
+            type="text"
+            id="input10"
+            name="input10"
+            value={inputValues.input10}
+            onChange={handleInputChange}
+            className="input"
+            placeholder="Enter the number 1"
+          />
+          {inputErrors.input10 && (
+            <p className="error-message">{inputErrors.input10}</p>
           )}
         </div>
 
