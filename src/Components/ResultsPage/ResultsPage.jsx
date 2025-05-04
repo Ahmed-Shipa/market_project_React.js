@@ -9,7 +9,7 @@ const customColumnNames = [
   "مكرونة",  // Input 3
   "الشاى",   // Input 4
   "برسيل",   // Input 5
-  "بريل",    // Input 6
+  "حلاوه",    // Input 6
   "ملح",     // Input 7
   "بسكويت",  // Input 8
   "صابون",   // Input 9

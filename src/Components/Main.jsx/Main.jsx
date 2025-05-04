@@ -103,9 +103,9 @@ const IntroductionForm = () => {
     input3: 8.35,
     input4: 4.90,
     input5: 4.35,
-    input6: 2.85,
+    input6: 3.85,
     input7: 1.15,
-    input8: 2.65,
+    input8: 1.45,
     input9: 7.25,
     input10: 17.75, 
   };
@@ -1077,7 +1077,7 @@ const IntroductionForm = () => {
         {/* Input 6 */}
         <div className="input-container">
           <label htmlFor="input6" className="label fw-bold fs-4">
-            بريل
+            حلاوه
           </label>
           <input
             type="text"
