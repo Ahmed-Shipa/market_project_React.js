@@ -1,5 +1,3 @@
-// IntroductionForm.js
-
 import React, { useState, useEffect } from "react";
 import Results from "../ResultsPage/ResultsPage";
 
@@ -15,7 +13,8 @@ const IntroductionForm = () => {
     "input7",
     "input8",
     "input9",
-    "input10", // New input key
+    "input10",
+    "input11", // New input key for جبنة
   ];
 
   // Managing state for each individual input
@@ -29,7 +28,8 @@ const IntroductionForm = () => {
     input7: "",
     input8: "",
     input9: "",
-    input10: "", // New input
+    input10: "",
+    input11: "", // New input for جبنة
   });
 
   // State to manage error messages for each input
@@ -43,7 +43,8 @@ const IntroductionForm = () => {
     input7: "",
     input8: "",
     input9: "",
-    input10: "", // New input error
+    input10: "",
+    input11: "", // New input error for جبنة
   });
 
   // State variables for combinations and pagination
@@ -52,9 +53,9 @@ const IntroductionForm = () => {
   const [tripledResults, setTripledResults] = useState([]);
   const [quadrupledResults, setQuadrupledResults] = useState([]);
   const [customResults, setCustomResults] = useState([]);
-  const [sixthResults, setSixthResults] = useState([]); // New state for sixth table
-  const [seventhResults, setSeventhResults] = useState([]); // New state for seventh table
-  const [eighthResults, setEighthResults] = useState([]); // New state for eighth table
+  const [sixthResults, setSixthResults] = useState([]);
+  const [seventhResults, setSeventhResults] = useState([]);
+  const [eighthResults, setEighthResults] = useState([]);
 
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -84,17 +85,17 @@ const IntroductionForm = () => {
   const [visibleCustomResults, setVisibleCustomResults] = useState([]);
   const [showMoreForCustom, setShowMoreForCustom] = useState(false);
 
-  const [currentPageForSixth, setCurrentPageForSixth] = useState(0); // New pagination state
-  const [visibleSixthResults, setVisibleSixthResults] = useState([]); // New visible results
-  const [showMoreForSixth, setShowMoreForSixth] = useState(false); // New show more state
+  const [currentPageForSixth, setCurrentPageForSixth] = useState(0);
+  const [visibleSixthResults, setVisibleSixthResults] = useState([]);
+  const [showMoreForSixth, setShowMoreForSixth] = useState(false);
 
-  const [currentPageForSeventh, setCurrentPageForSeventh] = useState(0); // New pagination state
-  const [visibleSeventhResults, setVisibleSeventhResults] = useState([]); // New visible results
-  const [showMoreForSeventh, setShowMoreForSeventh] = useState(false); // New show more state
+  const [currentPageForSeventh, setCurrentPageForSeventh] = useState(0);
+  const [visibleSeventhResults, setVisibleSeventhResults] = useState([]);
+  const [showMoreForSeventh, setShowMoreForSeventh] = useState(false);
 
-  const [currentPageForEighth, setCurrentPageForEighth] = useState(0); // New pagination state
-  const [visibleEighthResults, setVisibleEighthResults] = useState([]); // New visible results
-  const [showMoreForEighth, setShowMoreForEighth] = useState(false); // New show more state
+  const [currentPageForEighth, setCurrentPageForEighth] = useState(0);
+  const [visibleEighthResults, setVisibleEighthResults] = useState([]);
+  const [showMoreForEighth, setShowMoreForEighth] = useState(false);
 
   // Predefined multipliers for each input
   const inputMultipliers = {
@@ -107,7 +108,8 @@ const IntroductionForm = () => {
     input7: 1.15,
     input8: 1.45,
     input9: 7.25,
-    input10: 17.75, 
+    input10: 17.75,
+    input11: 13.75, // New multiplier for جبنة
   };
 
   // Handle input changes and validation
@@ -803,8 +805,8 @@ const IntroductionForm = () => {
       calculateCombinationsWithQuadrupledInputs(inputValues);
       calculateCombinationsWithCustomInputs(inputValues);
       calculateCombinationsWithSixthInputs(inputValues);
-      calculateCombinationsWithSeventhInputs(inputValues); // New calculation
-      calculateCombinationsWithEighthInputs(inputValues); // New calculation
+      calculateCombinationsWithSeventhInputs(inputValues);
+      calculateCombinationsWithEighthInputs(inputValues);
 
       // Set loading to false after calculations are done
       setIsLoading(false);
@@ -963,12 +965,12 @@ const IntroductionForm = () => {
         sixthResults={visibleSixthResults}
         showMoreForSixth={showMoreForSixth}
         onShowMoreForSixth={handleShowMoreForSixth}
-        seventhResults={visibleSeventhResults} // New prop
-        showMoreForSeventh={showMoreForSeventh} // New prop
-        onShowMoreForSeventh={handleShowMoreForSeventh} // New prop
-        eighthResults={visibleEighthResults} // New prop
-        showMoreForEighth={showMoreForEighth} // New prop
-        onShowMoreForEighth={handleShowMoreForEighth} // New prop
+        seventhResults={visibleSeventhResults}
+        showMoreForSeventh={showMoreForSeventh}
+        onShowMoreForSeventh={handleShowMoreForSeventh}
+        eighthResults={visibleEighthResults}
+        showMoreForEighth={showMoreForEighth}
+        onShowMoreForEighth={handleShowMoreForEighth}
         onGoBack={() => window.history.back()}
       />
     );
@@ -1112,7 +1114,7 @@ const IntroductionForm = () => {
           )}
         </div>
 
-        {/* New Input 8 */}
+        {/* Input 8 */}
         <div className="input-container">
           <label htmlFor="input8" className="label fw-bold fs-4">
             بسكويت
@@ -1131,7 +1133,7 @@ const IntroductionForm = () => {
           )}
         </div>
 
-        {/* New Input 9 */}
+        {/* Input 9 */}
         <div className="input-container">
           <label htmlFor="input9" className="label fw-bold fs-4">
             صابون
@@ -1150,7 +1152,7 @@ const IntroductionForm = () => {
           )}
         </div>
 
-        {/* New Input 10 */}
+        {/* Input 10 */}
         <div className="input-container">
           <label htmlFor="input10" className="label fw-bold fs-4">
             دقيق
@@ -1166,6 +1168,25 @@ const IntroductionForm = () => {
           />
           {inputErrors.input10 && (
             <p className="error-message">{inputErrors.input10}</p>
+          )}
+        </div>
+
+        {/* Input 11 */}
+        <div className="input-container">
+          <label htmlFor="input11" className="label fw-bold fs-4">
+            جبنة
+          </label>
+          <input
+            type="text"
+            id="input11"
+            name="input11"
+            value={inputValues.input11}
+            onChange={handleInputChange}
+            className="input"
+            placeholder="Enter the number 1"
+          />
+          {inputErrors.input11 && (
+            <p className="error-message">{inputErrors.input11}</p>
           )}
         </div>
 

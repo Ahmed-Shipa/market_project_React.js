@@ -14,6 +14,7 @@ const customColumnNames = [
   "بسكويت",  // Input 8
   "صابون",   // Input 9
   "دقيق", // Input 10
+  "جبنة", // Add this
 ];
 
 const Results = ({
